@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "ikea",
+  "version": "${version}",
+  "name": "IKEA Addon v${version}",
+  "description": "IKEA Addon for 6b6t",
+  "authors": [
+    "vined_",
+    "hokindo9000"
+  ],
+  "contact": {
+    "repo": "https://github.com/"
+  },
+  "icon": "assets/icon/ikea.png",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "org.vined.ikea.IKEA"
+    ]
+  },
+  "mixins": [
+    "ikea.mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "53,103,209"
+  },
+  "depends": {
+    "java": ">=17",
+    "minecraft": ">=${mc_version}",
+    "meteor-client": "*"
+  }
+}
