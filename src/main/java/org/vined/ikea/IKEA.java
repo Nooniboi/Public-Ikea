@@ -18,7 +18,7 @@ public class IKEA extends MeteorAddon {
     public static final Logger LOG = LogUtils.getLogger();
     public static final Category UTILITY = new Category("IKEA Utility");
     public static final Category DUPES = new Category("IKEA Dupes");
-    public static final Category MISC = new Category("IKEA Misc");
+
 
 
 

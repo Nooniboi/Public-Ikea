@@ -24,60 +24,64 @@ import net.minecraft.util.Hand;
 import org.vined.ikea.IKEA;
 import org.vined.ikea.utils.TimerUtils;
 
+import static org.vined.ikea.utils.PacketUtils.dismountPackets;
+
 @SuppressWarnings("ALL")
 public class IKEADupe extends Module {
-    public IKEADupe() {
-        super(IKEA.DUPES, "ikea-dupe", "Does the boat dupe. (Make sure an alt or your friend is in render distance for it to work)");
+
+    public IKEADupe(){
+        super(IKEA.DUPES,"IKEA-dupe-2.0","Does the updated IKEA dupe.");
     }
 
-    public ClientPlayNetworkHandler handler;
-    private final TimerUtils timer = new TimerUtils();
+    private final TimerUtils boatTimer = new TimerUtils();
+    private final TimerUtils throwTimer = new TimerUtils();
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
+
+    private final Setting<IKEADupe.Modes> modes = sgGeneral.add(new EnumSetting.Builder<IKEADupe.Modes>()
+        .name("modes")
+        .defaultValue(IKEADupe.Modes.Boat)
+        .build()
+    );
+
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
         .description("Faces the boat.")
         .defaultValue(true)
+        .visible(() -> modes.get() == Modes.Boat)
+        .build()
+    );
+
+    private final Setting<Double> boatTime = sgGeneral.add(new DoubleSetting.Builder()
+        .name("boat-timer")
+        .description("Delay between entering and exiting the boat.")
+        .defaultValue(0.5)
+        .min(0.1)
+        .visible(() -> modes.get() == Modes.Boat)
         .build()
     );
 
     @Override
-    public void onActivate() {
-        assert mc.getNetworkHandler() != null;
-        handler = mc.getNetworkHandler();
-    }
-
-    @Override
     public void onDeactivate() {
-        timer.reset();
+        boatTimer.reset();
+        throwTimer.reset();
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     private void onTickBoat(TickEvent.Post event) {
-        assert mc.world != null;
-        assert mc.player != null;
-
+        if (modes.get() != Modes.Boat) return;
         for (Entity entity : mc.world.getEntities()) {
-            if (entity instanceof ChestBoatEntity nearestBoat) {
-                if (PlayerUtils.distanceTo(nearestBoat.getPos()) > 5.5) continue;
-                if (!nearestBoat.hasPassenger(mc.player)) {
-                    if (timer.hasReached(100)) {
-                        sit(nearestBoat);
-                        timer.reset();
+            if (entity instanceof ChestBoatEntity boat) {
+                if (PlayerUtils.distanceTo(boat.getPos()) > 5.5) continue;
+                if (!boat.hasPassengers()) {
+                    if (boatTimer.hasReached((long) (boatTime.get() * 1000))) {
+                        interact(boat);
+                        boatTimer.reset();
                     }
                 } else {
-                    boatInventory();
-
-                    if (timer.hasReached(100)) {
-                        sendDismountPackets(nearestBoat);
-                        if (mc.currentScreen instanceof HandledScreen screen) {
-                            if (screen instanceof GenericContainerScreen) {
-                                if (nearestBoat.hasPassenger(mc.player)) {
-                                    sendDismountPackets(nearestBoat);
-                                }
-                            }
-                        }
-                        timer.reset();
+                    if (boatTimer.hasReached((long) (boatTime.get() * 1000))) {
+                        dismountPackets(boat);
+                        boatTimer.reset();
                     }
                 }
             }
@@ -85,23 +89,21 @@ public class IKEADupe extends Module {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    private void onTickThrow(TickEvent.Post event) {
-        assert mc.world != null;
-        assert mc.interactionManager != null;
-        assert mc.player != null;
-
+    private void onTickThrow(TickEvent.Pre event) {
+        if (modes.get() != Modes.Throw) return;
         for (Entity entity : mc.world.getEntities()) {
-            if (entity instanceof ChestBoatEntity nearestBoat) {
-                if (PlayerUtils.distanceTo(nearestBoat.getPos()) > 5.5) continue;
-                if (!nearestBoat.hasPassenger(mc.player)) {
-                    if(mc.currentScreen instanceof HandledScreen screen) {
+            if (entity instanceof ChestBoatEntity boat) {
+                if (PlayerUtils.distanceTo(boat.getPos()) > 5.5) continue;
+                if (!boat.hasPassengers()) {
+                    if (mc.currentScreen instanceof HandledScreen screen) {
                         if (screen instanceof GenericContainerScreen container) {
                             Inventory inv = container.getScreenHandler().getInventory();
-                            if (!inv.isEmpty()) {
+                            if (throwTimer.hasReached(100)) {
                                 for (int i = 0; i < inv.size(); i++) {
                                     InvUtils.drop().slotId(i);
                                 }
                             }
+                            throwTimer.reset();
                         }
                     }
                 }
@@ -110,9 +112,7 @@ public class IKEADupe extends Module {
     }
 
     @EventHandler
-    private void onGameLeft(GameLeftEvent event) {
-        toggle();
-    }
+    private void onGameLeft(GameLeftEvent event) { toggle(); }
 
     @EventHandler
     private void onScreenOpen(OpenScreenEvent event) {
@@ -121,30 +121,16 @@ public class IKEADupe extends Module {
         }
     }
 
-    public void sit(ChestBoatEntity boat) {
-        interact(boat);
-    }
     private void interact(Entity entity) {
-        assert mc.interactionManager != null;
-        if (rotate.get()) Rotations.rotate(Rotations.getYaw(entity), Rotations.getPitch(entity), -100, () -> mc.interactionManager.interactEntity(mc.player, entity, Hand.MAIN_HAND));
-        else mc.interactionManager.interactEntity(mc.player, entity, Hand.MAIN_HAND);
-    }
-
-    private void boatInventory() {
-        assert mc.player != null;
-        if (mc.currentScreen instanceof HandledScreen screen) {
-            if (screen instanceof GenericContainerScreen) return;
+        if (rotate.get()) {
+            Rotations.rotate(Rotations.getYaw(entity), Rotations.getPitch(entity), -100, () -> mc.interactionManager.interactEntity(mc.player, entity, Hand.MAIN_HAND));
+        } else {
+            mc.interactionManager.interactEntity(mc.player, entity, Hand.MAIN_HAND);
         }
-        mc.player.openRidingInventory();
     }
 
-    private void sendDismountPackets(ChestBoatEntity boat) {
-        assert mc.player != null;
-        assert handler != null;
-        handler.sendPacket(new PlayerInputC2SPacket(1, 1, false, true));
-        handler.sendPacket(new VehicleMoveC2SPacket(boat));
-        handler.sendPacket(new BoatPaddleStateC2SPacket(false, false));
-        handler.sendPacket(new TeleportConfirmC2SPacket(1));
-        handler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
+    public enum Modes {
+        Boat,
+        Throw
     }
 }

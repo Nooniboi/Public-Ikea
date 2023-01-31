@@ -1,5 +1,5 @@
 # Public-Ikea
-Public Ikea Addon version 0.1.7
+Public Ikea Addon version 0.1.8
 
 Discord Noon#6564
 
@@ -8,21 +8,19 @@ Discord Noon#6564
 Dupe explanation
 
 
-REMEMBER TO BIND YOUR DUPE KEY
+ 2 accounts needed.
 
-2 accounts needed alt or friend.
+Sit in boat and put in items (using mode boat dont toggle yet)
 
-start by getting them within render distance
+switch to alt and enable the module using throw and enter the boats gui
 
-log in first on the account that will be afk (or the reason the alt can dupe) 
+then using the main account either manually dismount and remount or use the module
 
-then connect the alt.
-
-when inserting items into the chestboat you have to sit in it as otherwise items are deleted.
+THE ALT WILL EMPTY INVENTORY ITSELF
 
 
 Mod Made by Hokindo(Nooniboi) & Vined_ ongoing versions are private.
 
 
-https://user-images.githubusercontent.com/65405548/214953724-0edd7835-e94b-4629-bdc4-3ee9c86ef7f1.mp4
+Subscribe to based guy https://www.youtube.com/@iwillnevershower
 
