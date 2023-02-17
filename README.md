@@ -1,26 +1,19 @@
 # Public-Ikea
-Public Ikea Addon version 0.1.8
+This is the public version that will be maintained by Hokindo
+
+report issues in issues
+
+feel free to suggest features
+
+
+modules added is what members of the ikea stash use regularly on 6b6t
+
 
 Discord Noon#6564
 
 
-
-Dupe explanation
-
-
- 2 accounts needed.
-
-Sit in boat and put in items (using mode boat dont toggle yet)
-
-switch to alt and enable the module using throw and enter the boats gui
-
-then using the main account either manually dismount and remount or use the module
-
-THE ALT WILL EMPTY INVENTORY ITSELF
+Private version is made by hokindo and vined_ and is only available for small amount of people
 
 
-Mod Made by Hokindo(Nooniboi) & Vined_ ongoing versions are private.
 
-
-Subscribe to based guy https://www.youtube.com/@iwillnevershower
 
