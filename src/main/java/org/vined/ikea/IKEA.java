@@ -34,8 +34,8 @@ public class IKEA extends MeteorAddon {
         Modules.get().add(new AutoItemMove());
         Modules.get().add(new PacketLogger());
 
-	// Commands
-	Commands.get().add(new ShulkerCounterCommand());
+	    // Commands
+	    Commands.get().add(new ShulkerCounterCommand());
     }
 
     @Override
