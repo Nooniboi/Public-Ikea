@@ -1,13 +1,11 @@
 # Public-Ikea
-This is the public version that will be maintained by Hokindo
-
 report issues in issues
 
 feel free to suggest features
 
+modules added is what members of the ikea stash use regularly on 6b6t or highly suggested.
 
-modules added is what members of the ikea stash use regularly on 6b6t
-
+Addon will remain for 1.19.2 
 
 Discord Noon#6564
 
