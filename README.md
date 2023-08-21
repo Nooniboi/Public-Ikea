@@ -44,5 +44,5 @@ Was made due to certain things missing that were required when the IKEA stash on
 
 ## Authors
 
-* **Nooniboi** - ** - [Nooniboi](https://github.com/Nooniboi) - **
-* **vined_** - ** - [vined_](https://github.com/vined-underscore) - **
+* [**Nooniboi**](https://github.com/Nooniboi)
+* [**vined_**](https://github.com/vined-underscore)
