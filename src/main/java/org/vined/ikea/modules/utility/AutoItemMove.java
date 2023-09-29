@@ -72,7 +72,7 @@ public class AutoItemMove extends Module {
             if (items.get().contains(slot.getStack().getItem())) {
                 if (mc.currentScreen == null) break;
                 if (timer.hasReached((long) (itemTimer.get() * 1000))) {
-                    InvUtils.quickMove().slotId(i);
+                    InvUtils.move().slotId(i);
                     timer.reset();
                 }
             }

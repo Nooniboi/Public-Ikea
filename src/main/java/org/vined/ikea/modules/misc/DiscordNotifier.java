@@ -31,7 +31,7 @@ public class DiscordNotifier extends Module {
     public SettingGroup sgNotifs = settings.createGroup("Notifications");
 
     public DiscordNotifier() {
-        super(IKEA.UTILITY,"discord-notifier", "Sends notifications to a Discord webhook");
+        super(IKEA.MISC,"discord-notifier", "Sends notifications to a Discord webhook");
     }
 
     private final Setting<String> link = sgGeneral.add(new StringSetting.Builder()

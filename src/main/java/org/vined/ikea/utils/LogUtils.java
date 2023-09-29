@@ -17,6 +17,6 @@ public class LogUtils {
         message.append(txt);
 
         IChatHud chatHud = (IChatHud) mc.inGameHud.getChatHud();
-        chatHud.add(message, 0);
+        chatHud.meteor$add(message,0);
     }
 }
