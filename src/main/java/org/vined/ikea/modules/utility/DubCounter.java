@@ -46,7 +46,7 @@ public class DubCounter extends Module {
     );
 
     public DubCounter() {
-        super(IKEA.UTILITY, "dub-counter", "Counts how many dubs are in render distance.");
+        super(IKEA.UTILITY, "dub-counter", "Counts how many double chests are in render distance.");
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DubCounter extends Module {
         } else {
             int length = ChunkUtils.getChestCount();
             int dubs = length % 2 == 0 ? length / 2 : (length - 1) / 2;
-            LogUtils.info(Formatting.GRAY + "There are roughly " + Formatting.WHITE + dubs + Formatting.GRAY + " (" + length + " normal chests)" + Formatting.WHITE + " loaded double chests.");
+            LogUtils.info(Formatting.GRAY + "There are roughly " + Formatting.WHITE + dubs + Formatting.GRAY + " (" + length + " normal chests)" + Formatting.GRAY + " loaded double chests.");
             toggle();
         }
     }
@@ -73,7 +73,7 @@ public class DubCounter extends Module {
             if (timer.hasReached(loadTime.get() * 1000L)) {
                 int length = coords.size();
                 int dubs = length % 2 == 0 ? length / 2 : (length - 1) / 2;
-                LogUtils.info(Formatting.GRAY + "There are roughly " + Formatting.WHITE + dubs + Formatting.GRAY + " (" + length + " normal chests)" + Formatting.WHITE + " rendered double chests.");
+                LogUtils.info(Formatting.GRAY + "There are roughly " + Formatting.WHITE + dubs + Formatting.GRAY + " (" + length + " normal chests)" + Formatting.GRAY + " rendered double chests.");
 
                 toggle();
                 timer.reset();
