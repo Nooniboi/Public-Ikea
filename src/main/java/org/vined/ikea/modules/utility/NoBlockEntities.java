@@ -59,7 +59,7 @@ public class NoBlockEntities extends Module {
     );
 
     public NoBlockEntities() {
-        super(IKEA.UTILITY, "NoRender", "Doesn't render block entities.");
+        super(IKEA.UTILITY, "no-block-entities", "Disables rendering for specified block entities.");
     }
 
     @EventHandler
