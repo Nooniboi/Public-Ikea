@@ -22,6 +22,9 @@
 
 IKEA Addon for Meteor Client!
 
+While we aim to update the addon to the most recent version, we will keep the main version at its current state, which is the one most clients are using.
+
+
 * 1.20.1
 * Great utility modules
 
