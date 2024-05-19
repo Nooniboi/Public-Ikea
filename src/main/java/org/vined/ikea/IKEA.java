@@ -2,13 +2,12 @@ package org.vined.ikea;
 
 import meteordevelopment.meteorclient.addons.MeteorAddon;
 import meteordevelopment.meteorclient.systems.modules.Category;
+import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
 import org.vined.ikea.modules.misc.DiscordNotifier;
-import org.vined.ikea.modules.utility.AutoItemMove;
-import org.vined.ikea.modules.utility.DubCounter;
-import org.vined.ikea.modules.utility.NoBlockEntities;
+import org.vined.ikea.modules.utility.*;
 
 
 public class IKEA extends MeteorAddon {
@@ -26,6 +25,9 @@ public class IKEA extends MeteorAddon {
         Modules.get().add(new DubCounter());
         Modules.get().add(new AutoItemMove());
         Modules.get().add(new DiscordNotifier());
+        Modules.get().add(new AntiDrop());
+        Modules.get().add(new AntiInteract());
+
 
     }
 

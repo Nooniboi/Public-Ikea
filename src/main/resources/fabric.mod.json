@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ikea",
   "version": "${version}",
-  "name": "IKEA Addon v${version}",
+  "name": "IKEA Addon",
   "description": "IKEA Addon for 6b6t",
   "authors": [
     "vined_",
@@ -11,7 +11,7 @@
   "contact": {
     "Discord": "5b5t"
   },
-  "icon": "assets/icon/ikea.png",
+  "icon": "ikea.png",
   "environment": "client",
   "entrypoints": {
     "meteor": [

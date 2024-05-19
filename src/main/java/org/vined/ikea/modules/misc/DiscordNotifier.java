@@ -100,6 +100,7 @@ public class DiscordNotifier extends Module {
         if (hook == null) return;
 
         if (stashNotifier.get()) {
+
             BlockPos pos = event.chunk.getPos().getStartPos();
             String posStr = "X: " + pos.getX() + " Z: " + pos.getZ();
             int chestCount = ChunkUtils.getChestCount(event.chunk);
@@ -107,7 +108,7 @@ public class DiscordNotifier extends Module {
             if (chestCount > chestLimit.get() || shulkerCount > shulkerLimit.get()) {
                 readyHook(hook);
                 hook.addEmbed(new DiscordWebhook.EmbedObject()
-                    .setTitle("Unusual chest or shulker amount!" + " (" + mc.player.getEntityName() + ")")
+                    .setTitle("Unusual chest or shulker amount!" + " (" + mc.player.getName() + ")")
                     .setColor(Color.YELLOW)
                     .addField("Coordinates:", posStr, false)
                     .addField("Chest Amount:", String.valueOf(chestCount), false)
@@ -130,7 +131,7 @@ public class DiscordNotifier extends Module {
             String posStr = "X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ();
             readyHook(hook);
             hook.addEmbed(new DiscordWebhook.EmbedObject()
-                .setTitle("You have died!" + " (" + mc.player.getEntityName() + ")")
+                .setTitle("You have died!" + " (" + mc.player.getName() + ")")
                 .setColor(Color.YELLOW)
                 .addField("Coordinates:", posStr,false)
                 .addField("Dimension:", PlayerUtils.getDimension().toString(), false)

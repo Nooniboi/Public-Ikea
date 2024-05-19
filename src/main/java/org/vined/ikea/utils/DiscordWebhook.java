@@ -19,7 +19,7 @@ public class DiscordWebhook {
     private boolean tts;
     private List<EmbedObject> embeds = new ArrayList<>();
 
-   // All of this code is from https://gist.github.com/k3kdude/fba6f6b37594eae3d6f9475330733bdb
+   // All of this code is from all credits to them https://gist.github.com/k3kdude/fba6f6b37594eae3d6f9475330733bdb
     public DiscordWebhook(String url) {
         this.url = url;
     }

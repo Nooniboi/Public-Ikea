@@ -24,16 +24,12 @@ IKEA Addon for Meteor Client!
 
 While we aim to update the addon to the most recent version, we will keep the main version at its current state, which is the one most clients are using.
 
-
-* 1.20.1
-* Great utility modules
-
 Was made due to certain things missing that were required when the IKEA stash on 6b6t was getting too large, such as NoChestRender.
 
 
 ### Prerequisites
 
-* Meteor Client 0.5.4 (1.20.1) found [here](https://meteorclient.com)
+* Meteor Client found [here](https://meteorclient.com)
 * Fabric Loader found [here](https://fabricmc.net/use/installer/)
 * Fabric API found [here](https://legacy.curseforge.com/minecraft/mc-mods/fabric-api)
 
