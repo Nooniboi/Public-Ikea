@@ -11,7 +11,7 @@
   "contact": {
     "Discord": "5b5t"
   },
-  "icon": "ikea.png",
+  "icon": "assets/ikea/ikea.png",
   "environment": "client",
   "entrypoints": {
     "meteor": [
