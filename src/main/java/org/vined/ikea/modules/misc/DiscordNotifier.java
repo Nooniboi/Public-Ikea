@@ -101,10 +101,10 @@ public class DiscordNotifier extends Module {
 
         if (stashNotifier.get()) {
 
-            BlockPos pos = event.chunk.getPos().getStartPos();
+            BlockPos pos = event.chunk().getPos().getStartPos();
             String posStr = "X: " + pos.getX() + " Z: " + pos.getZ();
-            int chestCount = ChunkUtils.getChestCount(event.chunk);
-            int shulkerCount = ChunkUtils.getShulkerCount(event.chunk);
+            int chestCount = ChunkUtils.getChestCount(event.chunk());
+            int shulkerCount = ChunkUtils.getShulkerCount(event.chunk());
             if (chestCount > chestLimit.get() || shulkerCount > shulkerLimit.get()) {
                 readyHook(hook);
                 hook.addEmbed(new DiscordWebhook.EmbedObject()
