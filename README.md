@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/Nooniboi/Public-Ikea">
-    <img src="https://cdn.discordapp.com/attachments/1062488528862314607/1142871904198332476/ikea.png" alt="Logo" width="80" height="80">
+    <img src="./ikea.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">IKEA Addon</h3>
