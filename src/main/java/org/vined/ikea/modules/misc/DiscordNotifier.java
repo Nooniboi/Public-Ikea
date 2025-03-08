@@ -1,5 +1,6 @@
 package org.vined.ikea.modules.misc;
 
+import meteordevelopment.meteorclient.events.entity.EntityAddedEvent;
 import meteordevelopment.meteorclient.events.game.OpenScreenEvent;
 import meteordevelopment.meteorclient.events.world.ChunkDataEvent;
 import meteordevelopment.meteorclient.settings.*;
@@ -10,6 +11,7 @@ import meteordevelopment.orbit.EventPriority;
 
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 import org.vined.ikea.IKEA;
@@ -81,6 +83,12 @@ public class DiscordNotifier extends Module {
         .defaultValue(true)
         .build());
 
+    private final Setting<Boolean> visualRange = sgNotifs.add(new BoolSetting.Builder()
+        .name("Visual Range")
+        .description("Notifies of a player entering visual range")
+        .defaultValue(true)
+        .build());
+
 
 
     @Override
@@ -120,6 +128,28 @@ public class DiscordNotifier extends Module {
             }
         }
     }
+
+    @EventHandler
+    private void onEntityAdded(EntityAddedEvent event) throws IOException {
+        assert mc.player != null;
+        if (hook == null) return;
+
+        if(event.entity instanceof PlayerEntity && visualRange.get()){
+            int PlayerX = (int) event.entity.getX();
+            int PlayerZ = (int) event.entity.getZ();
+            readyHook(hook);
+            hook.addEmbed(new DiscordWebhook.EmbedObject()
+                .setTitle("Player has entered visual range!")
+                .setColor(Color.RED)
+                    .addField("Player:", event.entity.getName().getString(),false)
+                .setThumbnail(avatar));
+
+            hook.execute();
+            hook.clearEmbeds();
+        }
+
+    }
+    
 
     @EventHandler(priority = EventPriority.HIGHEST)
     private void onOpenScreen(OpenScreenEvent event) throws IOException {
