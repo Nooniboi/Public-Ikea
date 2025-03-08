@@ -135,8 +135,6 @@ public class DiscordNotifier extends Module {
         if (hook == null) return;
 
         if(event.entity instanceof PlayerEntity && visualRange.get()){
-            int PlayerX = (int) event.entity.getX();
-            int PlayerZ = (int) event.entity.getZ();
             readyHook(hook);
             hook.addEmbed(new DiscordWebhook.EmbedObject()
                 .setTitle("Player has entered visual range!")
@@ -149,7 +147,7 @@ public class DiscordNotifier extends Module {
         }
 
     }
-    
+
 
     @EventHandler(priority = EventPriority.HIGHEST)
     private void onOpenScreen(OpenScreenEvent event) throws IOException {
