@@ -11,6 +11,8 @@ import meteordevelopment.orbit.EventHandler;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.client.render.block.entity.state.BlockEntityRenderState;
+import net.minecraft.client.render.block.entity.state.ChestBlockEntityRenderState;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 
@@ -84,10 +86,10 @@ public class DubCounter extends Module {
     @EventHandler
     private void onRenderBlockEntity(RenderBlockEntityEvent event) {
         if (countMode.get() == CountMode.Rendered) {
-            BlockEntity block = event.blockEntity;
-            if (block instanceof ChestBlockEntity chest) {
-                if (coords.contains(chest.getPos())) return;
-                coords.add(chest.getPos());
+            BlockEntityRenderState block = event.blockEntityState;
+            if (block instanceof ChestBlockEntityRenderState chest) {
+                if (coords.contains(block.pos)) return;
+                coords.add(block.pos);
             }
         }
     }

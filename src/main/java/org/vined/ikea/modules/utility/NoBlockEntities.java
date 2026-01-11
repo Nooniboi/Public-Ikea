@@ -12,6 +12,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 
+import net.minecraft.client.render.block.entity.state.BlockEntityRenderState;
 import org.vined.ikea.IKEA;
 
 import java.util.List;
@@ -65,10 +66,10 @@ public class NoBlockEntities extends Module {
     @EventHandler
     private void onRenderBlockEntity(RenderBlockEntityEvent event) {
         assert mc.world != null;
-        BlockEntity block = event.blockEntity;
+        BlockEntityRenderState block = event.blockEntityState;
 
-        if (blocks.get().contains(mc.world.getBlockState(block.getPos()).getBlock())) {
-            if (PlayerUtils.distanceTo(block.getPos()) > radius.get()) event.cancel();
+        if (blocks.get().contains(mc.world.getBlockState(block.pos).getBlock())) {
+            if (PlayerUtils.distanceTo(block.pos) > radius.get()) event.cancel();
         }
     }
 

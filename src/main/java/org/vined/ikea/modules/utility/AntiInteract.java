@@ -61,7 +61,7 @@ public class AntiInteract extends Module {
             event.cancel();
             return;
         }
-        ItemStack item = mc.player.getInventory().getMainHandStack();
+        ItemStack item = mc.player.getMainHandStack();
         if (items.get().contains(item.getItem())) {
             event.cancel();
             return;
@@ -85,7 +85,7 @@ public class AntiInteract extends Module {
             event.cancel();
             return;
         }
-        Item item = mc.player.getInventory().getMainHandStack().getItem();
+        Item item = mc.player.getMainHandStack().getItem();
         if (items.get().contains(item)) {
             event.cancel();
             return;
