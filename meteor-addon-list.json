@@ -1,0 +1,8 @@
+{
+    "feature_directories": {
+        "modules": [
+            "modules/misc",
+            "modules/utility"
+        ]
+    }
+}
