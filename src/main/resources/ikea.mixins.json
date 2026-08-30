@@ -3,7 +3,6 @@
   "package": "org.vined.ikea.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ModelBlockRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

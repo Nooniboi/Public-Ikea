@@ -11,13 +11,11 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import org.vined.ikea.IKEA;
 import org.vined.ikea.utils.BlockUtils;
 import java.util.List;
 
 public class NoRender extends Module {
-    public SettingGroup sgBlocks = settings.createGroup("Blocks");
     public SettingGroup sgBlockEntities = settings.createGroup("Block Entities");
 
     public final Setting<Integer> radius = sgBlockEntities.add(new IntSetting.Builder()
@@ -26,14 +24,6 @@ public class NoRender extends Module {
         .defaultValue(0)
         .min(0)
         .sliderMax(128)
-        .build()
-    );
-
-    public final Setting<List<Block>> blocks = sgBlocks.add(new BlockListSetting.Builder()
-        .name("blocks")
-        .description("The blocks not to render. (fully)")
-        .filter(block -> !BlockUtils.isBlockEntity(block))
-        .onChanged(value -> refreshChunks())
         .build()
     );
 
@@ -72,25 +62,6 @@ public class NoRender extends Module {
             "NoRender",
             "Disables rendering for selected blocks."
         );
-    }
-
-    public boolean shouldHide(BlockState state) {
-        if (!isActive()) return false;
-        return blocks.get().contains(state.getBlock());
-    }
-
-    @Override
-    public void onActivate() {
-        refreshChunks();
-    }
-
-    @Override
-    public void onDeactivate() {
-        refreshChunks();
-    }
-
-    private void refreshChunks() {
-        mc.execute(mc.levelRenderer::allChanged);
     }
 
     @EventHandler
