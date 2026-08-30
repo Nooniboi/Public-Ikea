@@ -67,7 +67,7 @@ public class NoRender extends Module {
 
     public NoRender() {
         super(
-            IKEA.MISC,
+            IKEA.UTILITY,
             "NoRender",
             "Disables rendering for selected blocks."
         );
