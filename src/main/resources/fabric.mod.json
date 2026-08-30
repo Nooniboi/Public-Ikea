@@ -3,7 +3,7 @@
   "id": "ikea",
   "version": "${version}",
   "name": "IKEA Addon",
-  "description": "IKEA Addon for 6b6t",
+  "description": "IKEA Addon",
   "authors": [
     "vined_",
     "hokindo9000"
@@ -22,11 +22,16 @@
     "ikea.mixins.json"
   ],
   "custom": {
-    "meteor-client:color": "53,103,209"
+    "meteor-client:color": "53,103,209",
+    "modmenu": {
+      "parent": {
+        "id": "meteor-client"
+      }
+    }
   },
   "depends": {
-    "java": ">=17",
-    "minecraft": ">=${mc_version}",
+    "java": ">=${jdk_version}",
+    "minecraft": "${minecraft_version}",
     "meteor-client": "*"
   }
 }

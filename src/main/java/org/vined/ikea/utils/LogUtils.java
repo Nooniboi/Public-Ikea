@@ -1,22 +1,27 @@
 package org.vined.ikea.utils;
 
 import meteordevelopment.meteorclient.mixininterface.IChatHud;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 public class LogUtils {
-    protected static MinecraftClient mc = MinecraftClient.getInstance();
+    protected static Minecraft mc = Minecraft.getInstance();
 
     public static void info(String txt) {
-        assert mc.world != null;
+        if (mc.level == null) return;
+        MutableComponent message = Component.empty();
+        message.append(
+            Component.literal("[")
+                .withStyle(ChatFormatting.GRAY)
+                .append(Component.literal("IK").withStyle(ChatFormatting.YELLOW))
+                .append(Component.literal("EA").withStyle(ChatFormatting.BLUE))
+                .append(Component.literal("] ").withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(txt).withStyle(ChatFormatting.GRAY))
+        );
 
-        MutableText message = Text.literal("");
-        message.append(Formatting.GRAY + "[" + Formatting.YELLOW + "IK" + Formatting.BLUE + "EA" + Formatting.GRAY + "] " + Formatting.GRAY);
-        message.append(txt);
-
-        IChatHud chatHud = (IChatHud) mc.inGameHud.getChatHud();
-        chatHud.meteor$add(message,0);
+        IChatHud chatHud = (IChatHud) mc.gui.hud.getChat();
+        chatHud.meteor$add(message, 0);
     }
 }

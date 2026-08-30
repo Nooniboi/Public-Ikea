@@ -8,19 +8,14 @@ import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
-
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.client.render.block.entity.state.BlockEntityRenderState;
-import net.minecraft.client.render.block.entity.state.ChestBlockEntityRenderState;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.blockentity.state.ChestRenderState;
+import net.minecraft.core.BlockPos;
 import org.vined.ikea.IKEA;
 import org.vined.ikea.utils.ChunkUtils;
 import org.vined.ikea.utils.LogUtils;
 import org.vined.ikea.utils.TimerUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,11 +50,11 @@ public class DubCounter extends Module {
     public void onActivate() {
         timer.reset();
         if (countMode.get() == CountMode.Rendered) {
-            LogUtils.info(Formatting.GRAY + "Please wait " + Formatting.WHITE + loadTime.get() + Formatting.GRAY + " second(s)...");
+            LogUtils.info(ChatFormatting.GRAY + "Please wait " + ChatFormatting.WHITE + loadTime.get() + ChatFormatting.GRAY + " second(s)...");
         } else {
             int length = ChunkUtils.getChestCount();
             int dubs = length % 2 == 0 ? length / 2 : (length - 1) / 2;
-            LogUtils.info(Formatting.GRAY + "There are roughly " + Formatting.WHITE + dubs + Formatting.GRAY + " (" + length + " normal chests)" + Formatting.GRAY + " loaded double chests.");
+            LogUtils.info(ChatFormatting.GRAY + "There are roughly " + ChatFormatting.WHITE + dubs + ChatFormatting.GRAY + " (" + length + " normal chests)" + ChatFormatting.GRAY + " loaded double chests.");
             toggle();
         }
     }
@@ -75,7 +70,7 @@ public class DubCounter extends Module {
             if (timer.hasReached(loadTime.get() * 1000L)) {
                 int length = coords.size();
                 int dubs = length % 2 == 0 ? length / 2 : (length - 1) / 2;
-                LogUtils.info(Formatting.GRAY + "There are roughly " + Formatting.WHITE + dubs + Formatting.GRAY + " (" + length + " normal chests)" + Formatting.GRAY + " rendered double chests.");
+                LogUtils.info(ChatFormatting.GRAY + "There are roughly " + ChatFormatting.WHITE + dubs + ChatFormatting.GRAY + " (" + length + " normal chests)" + ChatFormatting.GRAY + " rendered double chests.");
 
                 toggle();
                 timer.reset();
@@ -87,9 +82,9 @@ public class DubCounter extends Module {
     private void onRenderBlockEntity(RenderBlockEntityEvent event) {
         if (countMode.get() == CountMode.Rendered) {
             BlockEntityRenderState block = event.blockEntityState;
-            if (block instanceof ChestBlockEntityRenderState chest) {
-                if (coords.contains(block.pos)) return;
-                coords.add(block.pos);
+            if (block instanceof ChestRenderState chest) {
+                if (coords.contains(block.blockPos)) return;
+                coords.add(block.blockPos);
             }
         }
     }

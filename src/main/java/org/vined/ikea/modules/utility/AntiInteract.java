@@ -9,10 +9,9 @@ import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.Utils;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import org.vined.ikea.IKEA;
-
 import java.util.List;
 
 public class AntiInteract extends Module {
@@ -61,7 +60,8 @@ public class AntiInteract extends Module {
             event.cancel();
             return;
         }
-        ItemStack item = mc.player.getMainHandStack();
+        assert mc.player != null;
+        ItemStack item = mc.player.getMainHandItem();
         if (items.get().contains(item.getItem())) {
             event.cancel();
             return;
@@ -85,14 +85,15 @@ public class AntiInteract extends Module {
             event.cancel();
             return;
         }
-        Item item = mc.player.getMainHandStack().getItem();
+        assert mc.player != null;
+        Item item = mc.player.getMainHandItem().getItem();
         if (items.get().contains(item)) {
             event.cancel();
             return;
         }
         if (Utils.isShulker(item) && checkShulkers.get()) {
             ItemStack[] itemStacks = new ItemStack[27];
-            Utils.getItemsInContainerItem(item.getDefaultStack(), itemStacks);
+            Utils.getItemsInContainerItem(item.getDefaultInstance(), itemStacks);
             for (ItemStack itemStack : itemStacks) {
                 if (items.get().contains(itemStack.getItem())) {
                     event.cancel();
