@@ -21,7 +21,7 @@ public class LogUtils {
                 .append(Component.literal(txt).withStyle(ChatFormatting.GRAY))
         );
 
-        IChatHud chatHud = (IChatHud) mc.gui.hud.getChat();
+        IChatHud chatHud = (IChatHud) mc.gui.getChat();
         chatHud.meteor$add(message, 0);
     }
 }

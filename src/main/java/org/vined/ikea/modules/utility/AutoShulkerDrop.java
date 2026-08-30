@@ -44,7 +44,7 @@ public class AutoShulkerDrop extends Module {
 
     @EventHandler
     private void onTick(TickEvent.Post event) {
-        if (mc.gui.screen() != null || shulkers.get().isEmpty()) return;
+        if (mc.screen != null || shulkers.get().isEmpty()) return;
         for (int i = 0; i < mc.player.getInventory().getContainerSize(); i++) {
             ItemStack itemStack = mc.player.getInventory().getItem(i);
             if (shulkers.get().contains(itemStack.getItem())) {
