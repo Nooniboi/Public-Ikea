@@ -7,7 +7,6 @@
   <h3 align="center">IKEA Addon</h3>
 
   <p align="center">
-    What you thought IKEA didn't have
     <br/>
     <br/>
     <a href="https://github.com/Nooniboi/Public-Ikea/issues">Report Bug</a>
@@ -22,9 +21,7 @@
 
 IKEA Addon for Meteor Client!
 
-While we aim to update the addon to the most recent version, we will keep the main version at its current state, which is the one most clients are using.
-
-Was made due to certain things missing that were required when the IKEA stash on 6b6t was getting too large, such as NoChestRender.
+This is mainly updated on request.
 
 
 ### Prerequisites
